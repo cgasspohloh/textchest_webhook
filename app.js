@@ -3,7 +3,10 @@ const { bot } = require("./bot");
 const PORT = process.env.PORT || 8080;
 
 // Call the bot start function
-bot.message('start', async ({ message, say }) => say({"testing this out"}));
+bot.message('start', async ({ message, say }) => {
+    await say("Testing this out");
+});
+  
 
 // Launch the bot/app
 (async () => {
