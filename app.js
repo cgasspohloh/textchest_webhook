@@ -1,24 +1,14 @@
-const express = require('express');
-const bodyParser = require('body-parser');
+const { bot } = require("./bot");
 
-const app = express();
-const PORT = process.env.PORT || 3000; // You can change the port if needed
+const PORT = process.env.PORT || 8080;
 
-// Middleware to parse JSON request body
-app.use(bodyParser.json());
+// Call the bot start function
+bot.message('start', async ({ message, say }) => say({"testing this out"}));
 
-// Endpoint to receive SMS messages
-app.post('/sms', (req, res) => {
-  // Log the incoming payload
-  console.log('Received SMS:', req.body);
-  
-  // You can process the incoming SMS here
-  
-  // Send a response
-  res.status(200).send('SMS received successfully.');
-});
+// Launch the bot/app
+(async () => {
+    // Start your app
+    await bot.start(PORT);
+    console.log('⚡️ Bolt app is running!');
+})();
 
-// Start the server
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
